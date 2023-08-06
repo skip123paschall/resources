@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>pandas_george_1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>pandas_george_10</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7442,7 +7442,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Python-Pandas-Tutorial---Part-1">Python Pandas Tutorial - Part 1<a class="anchor-link" href="#Python-Pandas-Tutorial---Part-1">¶</a></h3>
+<h3 id="Python-Pandas-Tutorial---Part-10">Python Pandas Tutorial - Part 10<a class="anchor-link" href="#Python-Pandas-Tutorial---Part-10">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7454,7 +7454,19 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><a href="https://www.learndatasci.com/tutorials/python-pandas-tutorial-complete-introduction-for-beginners/">Source: G. McIntire et. al</a><br/>
-The notes about each step are mine, i.e. somewhat different from what's in McIntire's tutorial.</p>
+The code below comes largely from McIntire's tutorial, but sometimes include my code.<br/>
+The comments below are a combination of notes in McIntire's tutorial and my comments.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6862e4fd-5179-48e4-bddf-4e86f81b017a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Understanding-variables">Understanding variables<a class="anchor-link" href="#Understanding-variables">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7465,9 +7477,7 @@ The notes about each step are mine, i.e. somewhat different from what's in McInt
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Import pandas</strong><br/>
-Since this is a pandas tutorial, it's best to start by importing the pandas library.<br/>
-It's a Python convention to alias pandas with pd so you don't have to type out pandas everytime you use pandas.</p>
+<p><strong>Import pandas</strong></p>
 </div>
 </div>
 </div>
@@ -7476,7 +7486,7 @@ It's a Python convention to alias pandas with pd so you don't have to type out p
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -7486,41 +7496,143 @@ It's a Python convention to alias pandas with pd so you don't have to type out p
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b7fcee91-6d7c-403b-94d7-64803b9279b6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1a355b8f-46a9-441e-a68a-c2f8f3736ba9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Scenario">Scenario<a class="anchor-link" href="#Scenario">¶</a></h4><p>The scenario for this notebook is that customers buy apples and/or oranges from a store.</p>
+<p><strong>Read the IMDB movie data and clean up two column names</strong></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=589efa75-c0fd-4d23-9a79-bcaa7d314bb4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">movies_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"IMDB-Movie-Data.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"Title"</span><span class="p">)</span>
+<span class="n">movies_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'rank'</span><span class="p">,</span> <span class="s1">'genre'</span><span class="p">,</span> <span class="s1">'description'</span><span class="p">,</span> <span class="s1">'director'</span><span class="p">,</span> <span class="s1">'actors'</span><span class="p">,</span> <span class="s1">'year'</span><span class="p">,</span> <span class="s1">'runtime'</span><span class="p">,</span> 
+                     <span class="s1">'rating'</span><span class="p">,</span> <span class="s1">'votes'</span><span class="p">,</span> <span class="s1">'revenue_millions'</span><span class="p">,</span> <span class="s1">'metascore'</span><span class="p">]</span>
+</pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b66cac60-04a6-4992-9d8d-2b2db1d80240">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92dc5219-2f71-44bd-b3ad-196270ad7e27">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Create-a-DataFrame-from-a-dict">Create a DataFrame from a dict<a class="anchor-link" href="#Create-a-DataFrame-from-a-dict">¶</a></h4><p>One way to create a pandas Dataframe is to use data that's in a dict.</p>
+<p><strong>describe() - when used on a DataFrame</strong><br/>
+When used on a DataFrame, describe() acts on only continuous variables.
+Returns a DataFrame containing a summary of the distribution of the continuous variables.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6ec5f813-7260-459c-bbf8-a13de3e4fa60">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=51ee139b-0d6f-4a2c-ad36-13e3c6c371fb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Scenario: a fruit stand sells apples and oranges.</strong><br/>
-Create a dict named data. It contains two elements. The values are lists of integers.<br/>
-Each integer represents the quantity of that fruit bought by a customer.</p>
+<p>movies_df.describe())</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=824ef176-060d-4c98-8f06-19455a9f34f4">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=69c16d5a-0b4a-4b35-9b58-230bd45f13ee">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">movies_df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>pandas.core.frame.DataFrame</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=96a39a05-c1e6-4529-850e-c390810f4884">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Plotting - continuous variables</strong><br/>
+You should know which variables are continuous when choosing the type of plot.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f2fa0749-3997-4270-82b0-2867f7809d5c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>describe() - when used on a categorical variable</strong><br/>
+Returns a Series that contains:</p>
+<ol>
+<li>A count of rows.</li>
+<li>A unique could of the categories (e.g. genre has 207 unique values).</li>
+<li>Top category (Action, Adventure,Sci-Fi).</li>
+<li>Frequency of the top category (A,A,Sci-Fil shows up 50 times, i.e. frequency = 50).</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=afe71e51-e78f-49fd-8e3a-841880fe4f06">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">movies_df</span><span class="p">[</span><span class="s1">'genre'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>count                        1000
+unique                        207
+top       Action,Adventure,Sci-Fi
+freq                           50
+Name: genre, dtype: object</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ce0a97dd-388e-47e4-9585-945cb96f8244">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7528,33 +7640,37 @@ Each integer represents the quantity of that fruit bought by a customer.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'apples'</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-    <span class="s1">'oranges'</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="p">}</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">movies_df</span><span class="p">[</span><span class="s1">'genre'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=685e1cd4-f133-42c3-a0c8-ac554e22b9fd">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>pandas.core.series.Series</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0f01f666-37a1-4284-b260-5a0ce5ea5c9b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Create a DataFrame that has a default index</strong><br>
-Pass the dict to the pandas DataFrame constructor method.<br/>
-Each key:value element in the dict corresponds to a column name and values (a.k.a. variable) in the DataFrame.<br>
-Each column shows the quantity of a specific type of fruit puchased during each customer's purchase.<br/>
-Each row is a single customer's purchase. A customer could purchase two types of fruit or just one.<br>
-The DataFrame named data has a default index consisting of integers. There are four rows with indexes 0,1,2,3.<br/>
-In this DataFrame, you don't know the name of each customer.</br></br></br></p>
+<p><strong>value_counts() - pertains to categorical variables</strong><br/>
+Returns a Series that shows the frequency of all values in a column.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=85a2cc14-f2ea-4644-b390-45dffc172f90">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d8f4b8cf-2b7b-4e20-9fa8-f0219e681c3e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7562,8 +7678,7 @@ In this DataFrame, you don't know the name of each customer.</br></br></br></p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">purchases</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">purchases</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">movies_df</span><span class="p">[</span><span class="s1">'genre'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7575,71 +7690,24 @@ In this DataFrame, you don't know the name of each customer.</br></br></br></p>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>apples</th>
-<th>oranges</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>3</td>
-<td>0</td>
-</tr>
-<tr>
-<th>1</th>
-<td>2</td>
-<td>3</td>
-</tr>
-<tr>
-<th>2</th>
-<td>0</td>
-<td>7</td>
-</tr>
-<tr>
-<th>3</th>
-<td>1</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>genre
+Action,Adventure,Sci-Fi       50
+Drama                         48
+Comedy,Drama,Romance          35
+Comedy                        32
+Drama,Romance                 31
+Animation,Adventure,Comedy    27
+Action,Adventure,Fantasy      27
+Comedy,Drama                  27
+Comedy,Romance                26
+Crime,Drama,Thriller          24
+Name: count, dtype: int64</pre>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a7d1fe49-c6f1-472a-8a12-8add8bd84638">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><b>Create a DataFrame that has an explicit index</b><br/>
-The list passed below as the second argument contains the customers' names.<br/>
-So, now you can match a purchase event to a specific customer.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=08abb2e1-1987-4023-a463-fc695917efdd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=eb63638b-4aa5-40e2-94e7-efc73bd80d2f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7647,8 +7715,7 @@ So, now you can match a purchase event to a specific customer.</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">purchases</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"June"</span><span class="p">,</span> <span class="s2">"Robert"</span><span class="p">,</span> <span class="s2">"Lily"</span><span class="p">,</span> <span class="s2">"David"</span><span class="p">])</span>
-<span class="n">purchases</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">movies_df</span><span class="p">[</span><span class="s1">'genre'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -7660,6 +7727,45 @@ So, now you can match a purchase event to a specific customer.</p>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>pandas.core.series.Series</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0852b474-9d2f-47d9-9024-fec9444068ef">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>corr() - pertains to continuous variables</strong><br/>
+Returns a DataFrame that shows the relationship (correlation) for all pairs of continuous variables.<br/>
+Note: must us numeric_only_True argument to avoid ValueError.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=98a20563-ca9b-431a-9f55-ef258f249396">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">movies_df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7679,30 +7785,85 @@ So, now you can match a purchase event to a specific customer.</p>
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>apples</th>
-<th>oranges</th>
+<th>rank</th>
+<th>year</th>
+<th>runtime</th>
+<th>rating</th>
+<th>votes</th>
+<th>revenue_millions</th>
+<th>metascore</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>June</th>
-<td>3</td>
-<td>0</td>
+<th>rank</th>
+<td>1.000000</td>
+<td>-0.261605</td>
+<td>-0.221739</td>
+<td>-0.219555</td>
+<td>-0.283876</td>
+<td>-0.271592</td>
+<td>-0.191869</td>
 </tr>
 <tr>
-<th>Robert</th>
-<td>2</td>
-<td>3</td>
+<th>year</th>
+<td>-0.261605</td>
+<td>1.000000</td>
+<td>-0.164900</td>
+<td>-0.211219</td>
+<td>-0.411904</td>
+<td>-0.126790</td>
+<td>-0.079305</td>
 </tr>
 <tr>
-<th>Lily</th>
-<td>0</td>
-<td>7</td>
+<th>runtime</th>
+<td>-0.221739</td>
+<td>-0.164900</td>
+<td>1.000000</td>
+<td>0.392214</td>
+<td>0.407062</td>
+<td>0.267953</td>
+<td>0.211978</td>
 </tr>
 <tr>
-<th>David</th>
-<td>1</td>
-<td>2</td>
+<th>rating</th>
+<td>-0.219555</td>
+<td>-0.211219</td>
+<td>0.392214</td>
+<td>1.000000</td>
+<td>0.511537</td>
+<td>0.217654</td>
+<td>0.631897</td>
+</tr>
+<tr>
+<th>votes</th>
+<td>-0.283876</td>
+<td>-0.411904</td>
+<td>0.407062</td>
+<td>0.511537</td>
+<td>1.000000</td>
+<td>0.639661</td>
+<td>0.325684</td>
+</tr>
+<tr>
+<th>revenue_millions</th>
+<td>-0.271592</td>
+<td>-0.126790</td>
+<td>0.267953</td>
+<td>0.217654</td>
+<td>0.639661</td>
+<td>1.000000</td>
+<td>0.142397</td>
+</tr>
+<tr>
+<th>metascore</th>
+<td>-0.191869</td>
+<td>-0.079305</td>
+<td>0.211978</td>
+<td>0.631897</td>
+<td>0.325684</td>
+<td>0.142397</td>
+<td>1.000000</td>
 </tr>
 </tbody>
 </table>
@@ -7711,73 +7872,7 @@ So, now you can match a purchase event to a specific customer.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bab4e496-14b4-43f1-bcb3-b344f2f1f7b9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Select a row for a specific customer</strong><br>
-Use the DataFrame's loc method to select a row for the customer named June.<br>
-The loc method is referred to as an "indexer".<br/>
-So now you know that June purchased only apples.</br></br></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4e1b51ff-b123-48a0-8726-28dd018bb236">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Simple column extraction</strong><br/>
-Simple column extraction is done using single brackets.<br/>
-There are other methods of slicing, selecting and extracting.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bf317217-4633-4f7b-8ac6-c99e9238896b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">purchases</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'June'</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>apples     3
-oranges    0
-Name: June, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=264b4e2e-f59d-47aa-8ef1-feeb512535c9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>The loc method returns a pandas Series object</strong></p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=186df923-fade-413d-ac6d-a38a24c69383">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d60c20e6-e84c-473c-9a99-2efc646c7dc5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7785,7 +7880,7 @@ Name: June, dtype: int64</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">purchases</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'June'</span><span class="p">])</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">movies_df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -7798,22 +7893,40 @@ Name: June, dtype: int64</pre>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>pandas.core.series.Series</pre>
+<pre>pandas.core.frame.DataFrame</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7f559efb-7578-4952-bd63-212d9102294f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=57cf7f4d-078f-4178-80e4-2d7480cc024a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>DataFrame vs. Series</strong><br/>
-DataFrames are collections of Series.<br/>
-DataFrames and Series have different attributes.<br/>
-You need to know which type you are working with or else you will receive attribute errors.</p>
+<p><strong>Correlation Table</strong><br/>
+A correlation table is a numerical representation of all bivariable relationship in the data.<br/>
+A correlation table pertains only to continuous variables.</p>
+<ol>
+<li>Positive correlation: when variable A goes up then you see that variable B goes up also.</li>
+<li>Negative correlation: when varialbe A goes up then you see that variable B goes down, or vice versa.
+Cells (1,1), (2,2), (3,3) etc. all have 1.00, i.e. a variable always has perfect correlation to itself.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a2b37c37-5f81-4126-a272-9ad830c5371c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Examining bivariate relationship</strong><br/>
+Use when you have an outcome (dependent variable) and would like to see the feature most correlated<br/>
+to the increase or decrease of the outcome (dependent variable).<br/>
+Use a scatterplot to visualize bivariate relationships.</p>
 </div>
 </div>
 </div>
